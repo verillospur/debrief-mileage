@@ -1,0 +1,22 @@
+{
+  "name": "debrief-mileage",
+  "version": "1.0.0",
+  "description": "Debrief Mileage Helper Utility",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verillospur/debrief-mileage.git"
+  },
+  "author": "Ben Sturley <bensturley@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/verillospur/debrief-mileage/issues"
+  },
+  "homepage": "https://github.com/verillospur/debrief-mileage#readme",
+  "dependencies": {
+    "moment": "^2.26.0"
+  }
+}
