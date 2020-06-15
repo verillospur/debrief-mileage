@@ -3,61 +3,11 @@
 //
 'use strict';
 
-//#region datablock class
-
-class datablock {
-
-    constructor() {
-        this._data = [];
-        this._driverName = '(driver)';
-        this._datePosted = new Date();
-        this._dateWorked = new Date();
-        this._mileageData = '<none>';
-    }
-
-    //#region properties
-
-    get data() {
-        return this._data;
-    }
-    set data(v) {
-        this._data = v;
-    }
-
-    get driverName() {
-        return this._driverName;
-    }
-    set driverName(v) {
-        this._driverName = v;
-    }
-
-    get datePosted() {
-        return this._datePosted;
-    }
-    set datePosted(v) {
-        this._datePosted = v;
-    }
-
-    get dateWorked() {
-        return this._dateWorked;
-    }
-    set dateWorked(v) {
-        this._dateWorked = v;
-    }
-
-    get mileageData() {
-        return this._mileageData;
-    }
-    set mileageData(v) {
-        this._mileageData = v;
-    }
-
-    //#endregion
-}
-
-//#endregion
+const datablock = require('./datablock');
 
 const log = require('./log');
+const config = require('./config');
+const moment = require('moment');
 
 //#region is_block_start()
 const is_block_start = row => {
@@ -79,12 +29,32 @@ const is_block_start = row => {
 //#endregion
 
 //#region read()
-const read = data => {
+const read = (data, options = { filter: { dateFrom: null, dateTo: null } }) => {
+
     const lg = msg => { log.add(`[exportreader]: ${msg}`, log.levels.verbose); };
     lg('started');
 
     const datarows = data.toString().split('\n');
-    lg(`processing ${datarows.length} row(s)`)
+    lg(`processing ${datarows.length} row(s)`);
+
+    // filter
+    let filter_date = false, filter_date_from = false, filter_date_to = false;
+    let filter_date_from_value, filter_date_to_value;
+    if ( (options && options.filter) && (options.filter.dateFrom || options.filter.dateTo)) {
+        filter_date = true;
+        if (options.filter.dateFrom) {
+            filter_date_from = true;
+            filter_date_from_value = moment(options.filter.dateFrom, config.FORMAT_DATE);
+        }
+        if (options.filter.dateTo) {
+            filter_date_to = true;
+            filter_date_to_value = moment(options.filter.dateTo, config.FORMAT_DATE);
+        }
+    }
+
+    // get mileage data indicator strings
+    const m_l_i__ = config.MILEAGE_DATA_INDICATORS;
+    const m_l_i_ = m_l_i__.map(m => m.toString().toLowerCase());
 
     const blocks = [];
     let current_block;
@@ -104,28 +74,58 @@ const read = data => {
 
             const postedAt = row.substring(0, 17)
             b.datePosted = postedAt;
+
+            b.filterAllow = true;
+            if (filter_date) {
+                const posted_date = moment(b.datePosted, config.FORMAT_DATE);
+
+                let filter_allow = true;
+                if (filter_date_to) {
+                    filter_allow = filter_allow && posted_date.isBefore(filter_date_to_value);
+                }
+                
+                if (filter_date_from) {
+                    filter_allow = filter_allow && posted_date.isAfter(filter_date_from_value);
+                }
+
+                b.filterAllow = filter_allow;
+            }
         } 
 
         if (current_block) {
 
             current_block.data.push(row);
-            current_block._datePosted
+            current_block._datePosted;
+            
+            // VERY IMPORTANT! (the lower-casing)
+            let r = row.toString().toLowerCase();
 
-            const m_l_i_ = ['mileage', 'milege', 'milage', 'miles'];
-            const r = row;
             if (m_l_i_.find(s => { return (r.includes(s)); })) {
 
-                const m_d = r.substring(r.indexOf(':') +1).trim();
-                current_block.mileageData = m_d;    // + ` (${r})`;    //r;
-                current_block.mileageData_datarow = r;
-            }
+                if (row.toString().includes(current_block.driverName)) {
+                        
+                    // probably includes name/timestamp - strip it!
+                    const cb = (n, v) => { return (row[n] == v); };
+                    if (cb(2, '/') && cb(5, '/') && cb(10, ',') && cb(14, ':') && cb(18, '-')) {
 
+                        r = r.substring(19 + current_block.driverName.length);
+                    }
+                }
+
+                const m_d = r.substring(r.indexOf(':') +1).trim();
+                current_block.mileageData.push(m_d);
+                current_block.mileageData_datarow = r;
+
+                current_block.mileageDatarows.push(r);
+
+                current_block.mileageDataToRows.push({ data: m_d, row: r });
+            }
 
         }
 
     });
 
-    return blocks;
+    return blocks.filter(b => b.filterAllow);;
 
     lg('finished');
 };

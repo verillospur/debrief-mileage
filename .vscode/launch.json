@@ -11,7 +11,20 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\app.js"
+            "program": "${workspaceFolder}\\src\\app.js",
+            "env": {
+                "LOG_LEVEL": "verbose",
+                "WEBAPP_PORT": "2427",
+                "DRIVERS_DATA_FILE_PATH": "c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\drivers.json",
+                "TEST_EXPORT_FILE_PATH": "c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\sample_export.txt",
+                "MILEAGE_DATA_INDICATORS": "Mileage|milege|Milage|miles|mls",
+                "SAFEGUARD_MILEAGEDATA_MAXLENGTH": "50",
+                "SAFEGUARD_MILEAGE_MAX": "500",
+                "FORMAT_DATE": "DD/MM/YYYY",
+                "EXPORT_FORMAT_DATE": "DD/MM/YYYY, hh:mm",
+                "EXPORT_FORMAT_DATEPOSTED": "DD/MM/YYYY, hh:mm",
+            },
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

@@ -1,0 +1,16 @@
+
+Notes for Svet:
+~~~~~~~~~~~~~~~
+
+    JUNK
+    - the report shows "junk" mileage data - this is data that couldn't be processed
+    - it may be the junk sometimes contains proper mileage that you should manually add 
+      to the total for that driver
+        (eg: "Mileage: 129 (119 mine 10 miles sweeping)" - difficult for the software to process this without specific rules)
+    - data is "junked" if :-
+        - the length of the post exceeds 100 characters
+        - the mileage specified is greater than 500 miles (for that working day)
+    - these rules can easily be added, removed or changed
+
+
+

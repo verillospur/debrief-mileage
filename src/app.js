@@ -6,8 +6,12 @@
 const log = require('./log');
 const config = require('./config');
 
+const setupMoment = require('./setup-moment');
+setupMoment.run();
 
-log.add(`-- ${config.APP_NAME} --`);
+const welcome = require('./welcome');
+welcome.run();
 
 const workflow = require('./workflow');
 workflow.run();
+

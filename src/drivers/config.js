@@ -3,7 +3,6 @@
 //
 'use strict';
 
-
 const process = require('process');
 
 const config = (() => {
