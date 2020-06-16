@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <title><%= page_title %></title>
+    
+    <%- include('inc/head'); %>
+  </head>
+  <body>
+
+    <div class="clearfix title-bar">
+      <div class="title-badge">
+        <span style="font-size: small" class="code-inline">
+          <!--<img src="img/_dtt-logo.png" width="29" />-->
+          dtt
+          | ben.sturley
+          | svetoslav.nunev
+        </span>
+      </div>
+      <h4 style="margin-top: 0px; margin-bottom: 0px;">
+        <img src="img/dtt-logo_bb.png" width="60" />
+        <%= page_title %>
+      </h4>
+    </div>
+
+    <!-- Start Top Bar -->
+    <div class="top-bar">
+    </div>
+    <!-- End Top Bar -->
+
+
+    <div class="callout small primary">
+      <div class="row column text-center">
+        <div class="invisible">
+          Hello
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container fluid">
+      
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-2">
+          <small>EXPORT:</small>
+        </div>
+        <div class="cell auto">
+          <code>filename.txt</code>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-2">
+          <small>DATES:</small>
+        </div>
+        <div class="cell auto">
+          <code>01/04/2020 to 31/05/2020</code>
+        </div>
+      </div>
+
+      <!-- begin sep-bar -->
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep-bar">&nbsp;</div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep">&nbsp;</div>
+      </div>
+      <!-- end sep-bar -->
+
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-2">
+            <small>PROCESSED:</small>
+        </div>
+
+        <div class="cell auto">
+          
+          <div class="grid-x grid-padding-x">
+            <div class="cell auto">
+              <code><strong>212,324</strong> mile(s)</code>
+            </div>
+          </div>
+          <div class="grid-x grid-padding-x">
+            <div class="cell auto">
+              <code>for <strong>58</strong> driver(s)</code>
+            </div>
+          </div>
+          <div class="grid-x grid-padding-x">
+            <div class="cell auto">
+              <code>from <strong>2184</strong> datablocks (posts)</code>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- begin sep-bar -->
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep-bar">&nbsp;</div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep">&nbsp;</div>
+      </div>
+      <!-- end sep-bar -->
+
+      <div class="grid-x grid-padding-x">
+        
+        <div class="cell small-1">
+          <small>.</small>
+        </div>
+        <div class="cell small-4">
+          <small>DRIVER</small>
+        </div>
+        <div class="cell small-3">
+          <small>MILEAGE</small>
+        </div>
+        <div class="cell small-4">
+          <small>(junk)</small>
+        </div>
+
+      </div>
+
+      <!-- begin sep-bar -->
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep-bar">&nbsp;</div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep">&nbsp;</div>
+      </div>
+      <!-- end sep-bar -->
+
+      <!-- begin rows -->
+
+      <% for (const row of report.rows) { %>
+      <div class="grid-x grid-padding-x" style="margin-bottom: -10px">
+        
+        <div class="cell small-1 callout report-cell">
+          <small><%= row.rowNumber %></small>
+        </div>
+        <div class="cell small-4 callout report-cell">
+          <strong><%= row.driver %></strong>
+        </div>
+        <div class="cell small-3 callout report-cell">
+          <strong><%= row.mileageTotal %></strong> <small>miles</small>
+        </div>
+        <div class="cell small-4 callout report-cell">
+          <small>(junk)</small>
+        </div>
+
+      </div>
+      <% } %>
+
+      <!-- end rows -->
+
+      <!-- begin base -->
+      <div class="grid-x grid-padding-x">
+        
+        <div class="cell auto text-right">
+          
+          <ul class="menu simple align-right">
+            <li><a href="#">view raw output</a></li>
+            <li>|</li>
+            <li><a href="#">view log</a></li>
+          </ul>
+
+        </div>
+      </div>
+
+      <!-- begin sep-bar -->
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep-bar">&nbsp;</div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell auto sep">&nbsp;</div>
+      </div>
+      <!-- end sep-bar -->
+      
+    </div>
+
+
+    <%- include('inc/footer'); %>
+  </body>
+</html>

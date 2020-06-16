@@ -6,8 +6,14 @@
 const log = require('./log');
 const config = require('./config');
 
-const show = () => {
+const show = mode => {
     
+    if (mode && mode.toString() == 'webapp') {
+        log.add('$$$$$$$$$$$$$$$$$');
+        log.add('$$ W E B A P P $$');
+        log.add('$$$$$$$$$$$$$$$$$');
+    }
+
     log.add(`$$ -- ${config.APP_NAME} --`);
     log.add('$$ ---' + '-'.repeat(config.APP_NAME.length) + '---');
 

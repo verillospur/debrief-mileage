@@ -23,6 +23,7 @@
                 "FORMAT_DATE": "DD/MM/YYYY",
                 "EXPORT_FORMAT_DATE": "DD/MM/YYYY, hh:mm",
                 "EXPORT_FORMAT_DATEPOSTED": "DD/MM/YYYY, hh:mm",
+                "REPORTS_FILE_PATH": "c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\reports.json",
             },
             "internalConsoleOptions": "openOnSessionStart"
         }

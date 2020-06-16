@@ -1,0 +1,37 @@
+body {
+    background-color: #e0e0ff;
+}
+
+.title-bar {
+    background-color: rgb(44, 56, 64);
+    color: #fefefe;
+}
+
+.title-badge {
+    background-color: #e6e6e6;
+    color: #0a0a0a;
+    padding: 4px;
+    margin-right: 5px;
+}
+
+.sep {
+    line-height: .8em;
+}
+.sep-bar {
+    line-height: .8em;
+    border-bottom: 1px dashed #3f3f3f;
+}
+
+.report-cell {
+    background-color: #d0d0ff;
+    color: #000000;
+}
+.report-cell-driver {
+
+}
+.report-cell-miles {
+
+}
+.report-cell-junk {
+
+}

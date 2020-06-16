@@ -20,6 +20,8 @@ const config = () => {
         ,
         DRIVERS: require('./drivers/config')
         ,
+        WEBAPP: require('./webui/config')
+        ,
         TEST_EXPORT_FILE_PATH: 
             process.env.TEST_EXPORT_FILE_PATH
             ||
@@ -49,6 +51,11 @@ const config = () => {
         EXPORT_FORMAT_DATEPOSTED:
             process.env.EXPORT_FORMAT_DATEPOSTED
             || "DD/MM/YYYY, hh:mm"
+        ,
+        REPORTS_FILE_PATH: 
+            process.env.REPORTS_FILE_PATH
+            ||
+            'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\reports.json'
         ,
     };
 };

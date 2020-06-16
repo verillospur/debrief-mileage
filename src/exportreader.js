@@ -29,6 +29,11 @@ const is_block_start = row => {
 //#endregion
 
 //#region read()
+/**
+ * 
+ * @param {string} data 
+ * @param {*} options 
+ */
 const read = (data, options = { filter: { dateFrom: null, dateTo: null } }) => {
 
     const lg = msg => { log.add(`[exportreader]: ${msg}`, log.levels.verbose); };

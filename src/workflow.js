@@ -21,12 +21,39 @@ const workflow = () => {
         run() {
             lg('started');
 
+            
+            const params = {
+                filterDateFrom: new Date(),
+                filterDateTo: new Date(),
+                exportFilePath: config.TEST_EXPORT_FILE_PATH,
+                exportFilename: 'test-export-data.txt'
+            };
+
+            lg('storing params...');
+            const manager = require('./reportId');
+            const reportid = manager.newId(params);
+            lg(`stored params against id: ${reportid}`);
+
+            lg('running report');
+            const reporter = require('./reporter');
+            const report = reporter.run(params);
+            report.id = reportid;
+
+            lg(`generated ${report.rows.length} report row(s)`);
+        }
+
+
+        ,
+        _run_depr_() {
+            lg('started');
+
             // // get drivers list
             // lg('get drivers list');
         
             // const dman = require('./drivers/driversmanager');
             // dman.add_driver({ name: 'Ben' });
             // lg('drivers: ' + dman.get_drivers()[0].name)
+
 
             // get exported data
             const export_path = config.TEST_EXPORT_FILE_PATH;
