@@ -57,6 +57,15 @@ const config = () => {
             ||
             'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\reports.json'
         ,
+        REPORT_DETAIL_NAME_MILEAGEDATA:
+            'Individual Mileage'
+        ,
+        REPORT_DETAIL_NAME_POSTS:
+            'Driver\'s Posts'
+        ,
+        REPORT_DETAIL_NAME_JUNK:
+            'Junk Data (unprocessed)'
+        ,
     };
 };
 

@@ -16,6 +16,15 @@ class datablock {
         this._mileageDataToRows = [];
     }
 
+    getAllData() {
+        let rv = '';
+        this._data.forEach(d => {
+            if (rv.length > 0) rv += '\n';
+            rv += d.toString();
+        });
+        return rv;
+    }
+
     //#region properties
 
     get filterAllow() {

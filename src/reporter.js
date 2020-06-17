@@ -4,10 +4,12 @@
 'use strict';
 
 const log = require('./log');
+const config = require('./config');
 
 const report = require("./report");
 const reportRow = require('./reportRow');
 const reportDetail = require('./reportDetail');
+const renderer = require('./renderer');
 
 const run = (
     params = { 
@@ -61,15 +63,26 @@ const run = (
         // do details
         lg('creating posts details');
         const postsDetails = new reportDetail();
-        postsDetails.name = 'Driver\'s Posts';
+        postsDetails.name = config.REPORT_DETAIL_NAME_POSTS;
         postsDetails.data = driver.datablocks;
+        postsDetails.renderer = new renderer('posts');
         row.details.push(postsDetails);
 
         lg('creating total details');
         const totalDetails = new reportDetail();
-        totalDetails.name = 'Mileage per day';
+        totalDetails.name = config.REPORT_DETAIL_NAME_MILEAGEDATA;
         totalDetails.data = driver.mileageDatarows;
+        totalDetails.renderer = new renderer('mileagedata');
         row.details.push(totalDetails);
+
+        lg('creating junk details');
+        if (driver.junkDatarows.length > 0) {
+            const junkDetails = new reportDetail();
+            junkDetails.name = config.REPORT_DETAIL_NAME_JUNK;
+            junkDetails.data = driver.junkDatarows;
+            junkDetails.renderer = new renderer('junk');
+            row.details.push(junkDetails);
+        }
     });
     lg(`generated ${r.rows.length} row(s)`);
 

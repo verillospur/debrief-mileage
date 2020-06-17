@@ -30,10 +30,26 @@
 
     <div class="callout small primary">
       <div class="row column text-center">
-        <div class="invisible">
-          Hello
+        
+      </div>
+    </div>
+
+    <div class="">
+    <form method="POST" action="" enctype="multipart/form-data"> 
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <label>WhatsApp Debrief Group Export File</label>
+          <div class="callout"><input type="file" name="exportfile" /></div>
         </div>
       </div>
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <label>Input Label</label>
+          <input type="text" placeholder="large-12.cell" />
+        </div>
+      </div>
+    </form>
+      <hr />
     </div>
 
     <div class="grid-container fluid">
@@ -131,7 +147,7 @@
       <div class="grid-x grid-padding-x" style="margin-bottom: -10px">
         
         <div class="cell small-1 callout report-cell">
-          <small><%= row.rowNumber %></small>
+          <small><a name="row_<%= row.rowNumber %>"><%= row.rowNumber %></a></small>
         </div>
         <div class="cell small-4 callout report-cell">
           <strong><%= row.driver %></strong>
@@ -140,7 +156,28 @@
           <strong><%= row.mileageTotal %></strong> <small>miles</small>
         </div>
         <div class="cell small-4 callout report-cell">
-          <small>(junk)</small>
+          <% if (row.hasDetails()) { %>
+           <% let row_count = 0; %>
+            <ul>
+            <% for (const dets of row.details) { %>
+              <% row_count++; %>
+            <li>
+            <small><a 
+              onclick="$('#rowdetail_<%= row.rowNumber %>_<%= row_count %>').toggle(700);"
+              href="#row_<%= row.rowNumber %>"><%= dets.name %></a></small>
+
+            <div style="display: none;" id="rowdetail_<%= row.rowNumber %>_<%= row_count %>">
+            <% for (const data of dets.data) { %>
+
+                <code><small><%= dets.renderer.render(data).replace('\n', '<br/>') %></small></code> <br/>
+
+            <% } %>
+            </div>
+            </li>
+            <% } %>
+
+            </ul>
+          <% } %>
         </div>
 
       </div>
