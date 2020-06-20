@@ -5,6 +5,7 @@
 
 const log = require('./log');
 const config = require('./config');
+const moment = require('moment');
 
 const report = require("./report");
 const reportRow = require('./reportRow');
@@ -30,6 +31,20 @@ const run = (
     r.filterDateTo = params.filterDateTo;
     r.dateExecuted = new Date();
 
+    lg(`exportFilePath: ${r.exportFilePath}`);
+    lg(`exportFilename: ${r.exportFilename}`);
+    lg(`filterDateFrom: ${r.filterDateFrom}`);
+    lg(`filterDateTo: ${r.filterDateTo}`);
+    
+    if (
+        moment(r.filterDateFrom).isSame(moment(r.filterDateTo), 'day') 
+        ) {
+            // no date filter
+            lg('applying max/min date filter');
+            r.filterDateFrom = moment().subtract(100, 'year');
+            r.filterDateTo = moment().add(100, 'year');
+        }
+
     // load export data
     lg(`loading export data from: ${r.exportFilePath}`);
     const fileman = require('./fileman');
@@ -48,6 +63,8 @@ const run = (
     // create rows
     lg('generating report rows');
     let rowcount = 0;
+    let total_miles = 0;
+    let total_blocks = 0;
     drivers.forEach(driver => {
         lg(`processing driver: ${driver.name}`);
 
@@ -59,7 +76,12 @@ const run = (
 
         row.driver = driver.name;
         row.mileageTotal = driver.mileageTotal;
-        
+        total_miles += row.mileageTotal;
+        total_blocks += driver.datablocks.length;
+        lg(`- driver: ${row.driver}`);
+        lg(`- miles: ${row.mileageTotal}`);
+        lg(`- blocks: ${driver.datablocks.length}`);
+
         // do details
         lg('creating posts details');
         const postsDetails = new reportDetail();
@@ -85,6 +107,15 @@ const run = (
         }
     });
     lg(`generated ${r.rows.length} row(s)`);
+
+    lg(`got ${total_miles} total mile(s)`);
+    r.totalMiles = total_miles;
+
+    lg(`got ${total_blocks} total block(s)`);
+    r.totalBlocks = total_blocks;
+
+    r.filterDateFrom = moment(r.filterDateFrom).format(config.FORMAT_DATE);
+    r.filterDateTo = moment(r.filterDateTo).format(config.FORMAT_DATE);
 
     lg('returning report');
     return r;

@@ -23,9 +23,9 @@ const get_router = context => {
             const reportid = req.query.reportid;
             lg(`got report id: ${reportid}`);
 
-            let report = null, r = null;
+            let r = null;
             if (reportid) {
-                report = require('../../report');
+                const report = require('../../report');
                 r = report.load(reportid);
             }
 

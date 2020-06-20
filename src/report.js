@@ -11,6 +11,8 @@ class report {
         this._filterDateFrom = null;
         this._filterDateTo = null;
         this._rows = [];
+        this._totalMiles = 0;
+        this._totalBlocks = 0;
     }
 
 
@@ -81,6 +83,20 @@ class report {
     }
     set rows(v) {
         this._rows = v;
+    }
+
+    get totalMiles() {
+        return this._totalMiles;
+    }
+    set totalMiles(v) {
+        this._totalMiles = v;
+    }
+
+    get totalBlocks() {
+        return this._totalBlocks;
+    }
+    set totalBlocks(v) {
+        this._totalBlocks = v;
     }
 }
 

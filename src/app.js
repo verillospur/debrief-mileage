@@ -12,6 +12,11 @@ setupMoment.run();
 const welcome = require('./welcome');
 welcome.run();
 
-const workflow = require('./workflow');
-workflow.run();
+// const workflow = require('./workflow');
+// workflow.run();
+
+
+const reportid = 1;
+const report = require('./report');
+const r = report.load(reportid);
 

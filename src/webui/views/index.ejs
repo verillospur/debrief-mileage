@@ -68,7 +68,7 @@
           <small>EXPORT:</small>
         </div>
         <div class="cell auto">
-          <code>filename.txt</code>
+          <code><%= report.exportFilename %></code>
         </div>
       </div>
       <div class="grid-x grid-padding-x">
@@ -76,7 +76,7 @@
           <small>DATES:</small>
         </div>
         <div class="cell auto">
-          <code>01/04/2020 to 31/05/2020</code>
+          <code><%= report.filterDateFrom %> to <%= report.filterDateTo %></code>
         </div>
       </div>
 
@@ -98,17 +98,17 @@
           
           <div class="grid-x grid-padding-x">
             <div class="cell auto">
-              <code><strong>212,324</strong> mile(s)</code>
+              <code><strong><%= report.totalMiles %></strong> mile(s)</code>
             </div>
           </div>
           <div class="grid-x grid-padding-x">
             <div class="cell auto">
-              <code>for <strong>58</strong> driver(s)</code>
+              <code>for <strong><%= report.rows.length %></strong> driver(s)</code>
             </div>
           </div>
           <div class="grid-x grid-padding-x">
             <div class="cell auto">
-              <code>from <strong>2184</strong> datablocks (posts)</code>
+              <code>from <strong><%= report.totalBlocks %></strong> datablock(s) (posts)</code>
             </div>
           </div>
 

@@ -57,26 +57,40 @@ const server = function() {
 
                 const _bag = {};
                 const attempt_completion = bag => {
-                    if (bag.file 
-                        && bag.dateFrom 
-                        && bag.dateTo
-                        && (!bag.reportId) {
+                    if (bag.filePath 
+                        && bag.fileName
+                        // && bag.dateFrom 
+                        // && bag.dateTo
+                        && !bag.reportId) {
 
+                            const rptid = require('../reportId');
+                            const reportId = rptid.newId(
+                                {
+                                    exportFilePath: bag.filePath,
+                                    exportFilename: bag.fileName,
+                                    filterDateFrom: bag.dateFrom,
+                                    filterDateTo: bag.dateTo
+                                }
+                            );
+                            bag.reportId = reportId;
+                            // res.redirect(`/?reportid=${reportId}`);
                         }
 
                     if (bag.reportId) {
-                        res.redirect(`/reportid=${bag.reportId}`)
-                    }}
-                };
+                        res.redirect(`/?reportid=${bag.reportId}`)
+                    }
+                }
 
                 new formidable.IncomingForm().parse(req)
                     .on('field', (name, field) => {
                         lg(`Field: ${name};${field}`);
                         if (name === 'startdate') {
                             _bag.dateFrom = field;
+                            attempt_completion(_bag);
                         }
                         if (name === 'enddate') {
                             _bag.dateTo = field;
+                            attempt_completion(_bag);
                         }
                     })
                     .on('fileBegin', (name, file) => {
@@ -95,6 +109,11 @@ const server = function() {
                     .on('file', (name, file) => {
                         lg(`File: ${name}:${file.name}`);
                         lg(file.path);
+                        if (file.name) {
+                            _bag.fileName = file.name;
+                            _bag.filePath = file.path;
+                            attempt_completion(_bag);
+                        }
                     })
                     .on('aborted', () => {
                         lg('Aborted!');

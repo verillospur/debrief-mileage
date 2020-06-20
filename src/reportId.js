@@ -6,13 +6,23 @@
 const config = require('./config');
 const { parseZone } = require('moment');
 
+const testNewId = () => {
+    const reports = load_reports();
+    let highId = 0;
+    if (reports.length > 0) {
+        highId = reports.sort((x, y) => y.id - x.id)[0].id;
+    }
+    const newId = highId + 1;
+    return newId;
+};
+
 const newId = (params = { exportFilePath, exportFilename, filterDateFrom, filterDateTo }) => {
     
     const reports = load_reports();
     
     let highId = 0;
     if (reports.length > 0) {
-        highId = reports.sort((x, y) => { y.id - x.id })[0].id;
+        highId = reports.sort((x, y) => y.id - x.id)[0].id;
     }
 
     const newId = highId + 1;
@@ -68,6 +78,7 @@ const load = id => {
 
 module.exports = {
     newId: newId,
+    testNewId: testNewId,
     save: save,
     load: load,
 };

@@ -40,6 +40,10 @@ const workflow = () => {
             report.id = reportid;
 
             lg(`generated ${report.rows.length} report row(s)`);
+
+            report.rows.forEach(row => {
+                lg(`row ${row.rowNumber}: ${row.driver}: ${row.mileageTotal}`);
+            });
         }
 
 
