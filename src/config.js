@@ -4,6 +4,7 @@
 'use strict';
 
 const process = require('process');
+const path = require('path');
 
 const config = () => {
 
@@ -13,7 +14,8 @@ const config = () => {
         APP_WMSG: [
             'verillospur: [o] n [t] h e [w] e b',
             'member of The Urchin McSchlong Group',
-            '[...the Hidden Dips initiative]'
+            '[...the Hidden Dips initiative]',
+            '\\...-:[revelinabandon]:-...//',
             ]
         ,
         LOG: require('./log/config')
@@ -25,10 +27,11 @@ const config = () => {
         TEST_EXPORT_FILE_PATH: 
             process.env.TEST_EXPORT_FILE_PATH
             ||
-            'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\sample_export.txt'
+            path.join(__dirname, 'data', 'sample_export.txt')
+            // 'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\sample_export.txt'
         ,
         MILEAGE_DATA_INDICATORS:
-            process.env.MILEAGE_DATA_INDICATORS.split('|')
+            (process.env.MILEAGE_DATA_INDICATORS || '').split('|')
             ||
             ['mileage', 'milege', 'milage', 'miles', 'mls']
         ,
@@ -55,7 +58,14 @@ const config = () => {
         REPORTS_FILE_PATH: 
             process.env.REPORTS_FILE_PATH
             ||
-            'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\reports.json'
+            path.join(__dirname, 'data', 'reports.json')
+            // 'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\reports.json'
+        ,
+        REPORTS_DIR_PATH: 
+            process.env.REPORTS_DIR_PATH
+            ||
+            path.join(__dirname, 'data')
+            // 'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data'
         ,
         REPORT_DETAIL_NAME_MILEAGEDATA:
             'Individual Mileage'

@@ -30,27 +30,36 @@
 
     <div class="callout small primary">
       <div class="row column text-center">
-        
+
       </div>
     </div>
 
     <div class="">
     <form method="POST" action="" enctype="multipart/form-data"> 
       <div class="grid-x grid-padding-x">
-        <div class="large-12 cell">
-          <label>WhatsApp Debrief Group Export File</label>
+        <div class="large-8 small-8 cell">
+          <label>Upload Debrief Chat Group Export File</label>
           <div class="callout"><input type="file" name="exportfile" /></div>
         </div>
       </div>
       <div class="grid-x grid-padding-x">
-        <div class="large-12 cell">
-          <label>Input Label</label>
-          <input type="text" placeholder="large-12.cell" />
+        <div class="large-4 small-4 cell">
+          <label>Start Date</label>
+          <input type="text" placeholder="dd/mm/yyyy" name="startdate" />
+        </div>
+        <div class="large-4 small-4 cell">
+          <label>End Date</label>
+          <input type="text" placeholder="dd/mm/yyyy" name="enddate" />
+        </div>
+        <div class="large-8 small-8 cell">
+          <input type="submit" value="Submit Form" class="button" /> 
         </div>
       </div>
     </form>
       <hr />
     </div>
+
+    <% if (report) { %>
 
     <div class="grid-container fluid">
       
@@ -209,6 +218,8 @@
       <!-- end sep-bar -->
       
     </div>
+
+    <% } %>
 
 
     <%- include('inc/footer'); %>
