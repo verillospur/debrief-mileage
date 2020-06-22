@@ -35,3 +35,12 @@ body {
 .report-cell-junk {
 
 }
+
+.svet-notice {
+    margin-left: 35px; 
+    margin-right: 10px;
+}
+
+altrow {
+    background-color: red !important;
+}

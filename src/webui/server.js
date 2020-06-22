@@ -99,7 +99,7 @@ const server = function() {
                                 file.path = get_file_path(file.name);
                             } 
                             else {
-                                res.end('<h1>Please select a file!</h1>');
+                                res.end('<h1>You must select a WhatsApp chat export data file to upload.<br/><br/>Come on, man! Click the BACK button and do it properly.</h1>');
                             }
                         } catch (err) {
                             lg(`Error: ${err}`);

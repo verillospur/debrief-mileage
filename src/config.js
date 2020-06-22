@@ -29,9 +29,9 @@ const config = () => {
             ||
             path.join(__dirname, 'data', 'sample_export.txt')
             // 'c:\\dev\\verillospur\\server\\debrief-mileage\\src\\data\\sample_export.txt'
-        ,
+        , 
         MILEAGE_DATA_INDICATORS:
-            (process.env.MILEAGE_DATA_INDICATORS || '').split('|')
+            (process.env.MILEAGE_DATA_INDICATORS || 'mileage|milege|milage|miles|mls').split('|')
             ||
             ['mileage', 'milege', 'milage', 'miles', 'mls']
         ,

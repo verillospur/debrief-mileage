@@ -17,7 +17,7 @@
         </span>
       </div>
       <h4 style="margin-top: 0px; margin-bottom: 0px;">
-        <img src="img/dtt-logo_bb.png" width="60" />
+        <a href="https://dttdeliveries.co.uk/" target="_blank"><img src="img/dtt-logo_bb.png" width="60" /></a>
         <%= page_title %>
       </h4>
     </div>
@@ -27,32 +27,47 @@
     </div>
     <!-- End Top Bar -->
 
-
-    <div class="callout small primary">
+    <div class="callout small success">
       <div class="row column text-center">
 
       </div>
     </div>
 
-    <div class="">
+
+    <% if (showNotice) { %>
+    <div class="callout svet-notice" id="svet-notice">
+      <div class="float-right">[ <a xhref="#" onclick="$('#svet-notice').hide()">hide this notice</a> ]</div>
+      <%- include('inc/svetnotice'); %>
+      <div class="float-right">[ <a xhref="#" onclick="$('#svet-notice').hide()">hide this notice</a> ]</div>
+      <div class="clearfix"></div>
+    </div>
+    <% } %>
+
+    <div class="float-right" style="margin-right: 10px;">[ <a xhref="#" onclick="$('#theform').toggle({ duration: 200, easing: 'swing' })"><i class="fi-clipboard-pencil"></i> toggle form</a> ]</div>
+    <div class="clearfix"></div>
+    <div class="" id="theform" 
+    <% if (hideForm) { %> style="display: none;" <% } %>
+    >
     <form method="POST" action="" enctype="multipart/form-data"> 
       <div class="grid-x grid-padding-x">
-        <div class="large-8 small-8 cell">
+        <div class="large-12 medium-12 small-12 cell">
           <label>Upload Debrief Chat Group Export File</label>
           <div class="callout"><input type="file" name="exportfile" /></div>
         </div>
       </div>
       <div class="grid-x grid-padding-x">
-        <div class="large-4 small-4 cell">
+        <div class="large-6 medium-6 small-6 cell">
           <label>Start Date</label>
           <input type="text" placeholder="dd/mm/yyyy" name="startdate" />
         </div>
-        <div class="large-4 small-4 cell">
+        <div class="large-6 medium-6 small-6 cell">
           <label>End Date</label>
           <input type="text" placeholder="dd/mm/yyyy" name="enddate" />
         </div>
-        <div class="large-8 small-8 cell">
-          <input type="submit" value="Submit Form" class="button" /> 
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 medium-12 small-12 cell">
+          <input type="submit" value="Run Mileage Report" class="button" /> 
         </div>
       </div>
     </form>
@@ -60,12 +75,12 @@
     </div>
 
     <% if (report) { %>
-
+    <div class="clearfix"></div>
     <div class="grid-container fluid">
-      
+      <hr/>
       <div class="grid-x grid-padding-x">
         <div class="cell small-2">
-          <small>EXPORT:</small>
+          <i class="fi-page-export" style="margin-right: 5px;"></i> <small>EXPORT:</small>
         </div>
         <div class="cell auto">
           <code><%= report.exportFilename %></code>
@@ -73,7 +88,7 @@
       </div>
       <div class="grid-x grid-padding-x">
         <div class="cell small-2">
-          <small>DATES:</small>
+          <i class="fi-calendar" style="margin-right: 10px;"></i> <small>DATES:</small>
         </div>
         <div class="cell auto">
           <code><%= report.filterDateFrom %> to <%= report.filterDateTo %></code>
@@ -91,7 +106,7 @@
 
       <div class="grid-x grid-padding-x">
         <div class="cell small-2">
-            <small>PROCESSED:</small>
+            <i class="fi-loop" style="margin-right: 10px;"></i> <small>PROCESSED:</small>
         </div>
 
         <div class="cell auto">
@@ -124,72 +139,73 @@
       </div>
       <!-- end sep-bar -->
 
-      <div class="grid-x grid-padding-x">
+      <div class="grid-x grid-padding-x" style="margin-bottom: -10px">
         
-        <div class="cell small-1">
+        <div class="callout secondary large-1 small-1">
           <small>.</small>
         </div>
-        <div class="cell small-4">
-          <small>DRIVER</small>
+        <div class="callout secondary large-3 small-3">
+          <i class="fi-male-female" style="font-size: 18px;"></i> <small><strong>DRIVER</strong></small>
         </div>
-        <div class="cell small-3">
-          <small>MILEAGE</small>
+        <div class="callout secondary large-2 small-2">
+          <i class="fi-blind" style="font-size: 18px;"></i> <small><strong>MILEAGE</strong></small>
         </div>
-        <div class="cell small-4">
-          <small>(junk)</small>
+        <div class="callout secondary large-6 small-6">
+          <small></small>
         </div>
 
       </div>
-
-      <!-- begin sep-bar -->
-      <div class="grid-x grid-padding-x">
-        <div class="cell auto sep-bar">&nbsp;</div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell auto sep">&nbsp;</div>
-      </div>
-      <!-- end sep-bar -->
 
       <!-- begin rows -->
 
+      <% let is_alt = false; %>
       <% for (const row of report.rows) { %>
-      <div class="grid-x grid-padding-x" style="margin-bottom: -10px">
+      <div class="grid-x grid-padding-x" style="margin-bottom: -14px;">
         
-        <div class="cell small-1 callout report-cell">
-          <small><a name="row_<%= row.rowNumber %>"><%= row.rowNumber %></a></small>
+        <div stylex="margin-bottom: -5px;" class="cell large-1 small-1 callout report-cell <% if (is_alt) { %> success <% } %>">
+          <i class="fi-paperclip" style="font-size: 12px;"></i> <small><a name="row_<%= row.rowNumber %>"><%= row.rowNumber %></a></small>
         </div>
-        <div class="cell small-4 callout report-cell">
-          <strong><%= row.driver %></strong>
+        <div stylex="margin-bottom: -5px;"  class="cell large-3 small-3 callout report-cell <% if (is_alt) { %> success <% } %>">
+          <i class="fi-torso" style="font-size: 12px;"></i> <span style="font-size: 1.1em"><%= row.driver %></span>
         </div>
-        <div class="cell small-3 callout report-cell">
-          <strong><%= row.mileageTotal %></strong> <small>miles</small>
+        <div stylex="margin-bottom: -5px;"  class="cell large-2 small-2 callout report-cell <% if (is_alt) { %> success <% } %>">
+          <%= row.mileageTotal %> <small>miles</small>
         </div>
-        <div class="cell small-4 callout report-cell">
+        <div stylex="margin-bottom: -5px;"  class="cell large-6 small-6 callout report-cell <% if (is_alt) { %> success <% } %>">
           <% if (row.hasDetails()) { %>
            <% let row_count = 0; %>
-            <ul>
             <% for (const dets of row.details) { %>
               <% row_count++; %>
-            <li>
-            <small><a 
-              onclick="$('#rowdetail_<%= row.rowNumber %>_<%= row_count %>').toggle(700);"
-              href="#row_<%= row.rowNumber %>"><%= dets.name %></a></small>
+            
+            <a class="button"
+              onclick="$('#rowdetail_<%= row.rowNumber %>_<%= row_count %>').toggle(300);"
+              xhref="#row_<%= row.rowNumber %>">
+              <i class="fi-magnifying-glass"></i>
+              <small><%= dets.name %></small></a>
 
             <div style="display: none;" id="rowdetail_<%= row.rowNumber %>_<%= row_count %>">
             <% for (const data of dets.data) { %>
 
-                <code><small><%= dets.renderer.render(data).replace('\n', '<br/>') %></small></code> <br/>
+              <div class="grid-x" style="margin-bottom: -10px">
+                <div class="auto cell">
+                  <div class="callout primary">
+                    <small><%- dets.renderer.render(data) %></small>
+                  </div>
+                </div>
+              </div>
 
             <% } %>
+            <br/>
             </div>
-            </li>
+            
             <% } %>
-
-            </ul>
           <% } %>
         </div>
 
       </div>
+      
+      
+      <% is_alt = !is_alt; %>
       <% } %>
 
       <!-- end rows -->
@@ -220,7 +236,6 @@
     </div>
 
     <% } %>
-
 
     <%- include('inc/footer'); %>
   </body>

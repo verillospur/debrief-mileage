@@ -121,7 +121,7 @@ const read = (data, options = { filter: { dateFrom: null, dateTo: null } }) => {
                 current_block.mileageData.push(m_d);
                 current_block.mileageData_datarow = r;
 
-                current_block.mileageDatarows.push(r);
+                current_block.mileageDatarows.push(row);
 
                 current_block.mileageDataToRows.push({ data: m_d, row: r });
             }

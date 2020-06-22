@@ -24,9 +24,13 @@ const get_router = context => {
             lg(`got report id: ${reportid}`);
 
             let r = null;
+            let showNotice = true;
+            let hideForm = false;
             if (reportid) {
                 const report = require('../../report');
                 r = report.load(reportid);
+                showNotice = false;
+                hideForm = true;
             }
 
             lg('rendering');
@@ -36,6 +40,8 @@ const get_router = context => {
                     page_title: 'Driver Mileage Helper',
                     report_id: reportid,
                     report: r,
+                    showNotice: showNotice,
+                    hideForm: hideForm,
                 }
             );
         }

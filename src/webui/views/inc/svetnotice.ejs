@@ -1,0 +1,56 @@
+<div>
+    <h4 style="color: darkred;"><i class="fi-info"></i> &nbsp;Svet!</h4>
+    <p>I've knocked this thing together in an effort to maybe save you a
+        bit of time when it comes to doing our mileage :-)</p>
+    <p>In essence, it takes an export from the WhatsApp debrief chat (text file, 
+        easily exported from WhatsApp) and adds up all the mileage reported, 
+        and gives you a report of all drivers in the export and the total mileage
+        for each.</p>
+    <p>You can choose the date range to process.</p>
+    <p>I don't know if this will really save you much time in reality. Perhaps it could
+        enable you to do the mileage weekly rather than daily or something.</p>
+    <p>Don't feel obliged to use it - you won't make me cry or anything if you don't. 
+        It's been a good little exercise for me for my coding portfolio and I've learnt
+        how to host stuff on the Google Cloud Platform, so it's all good.</p>
+    <p>It can't process EVERYTHING without fault at the moment I'm afraid - for example, 
+        something like:</p>
+    <p><code style="margin-left: 30px;">Mileage: 155, 15-20 miles diversion, road closure near lakenheath</code></p>
+    <p>... will confuse it.</p>
+    <p>(Because there's more than one number there. It doesn't know which one to use.)</p>
+    <p>So to address this - for each driver, there's a list of "Junk" or "Unprocessed" entries that couldn't
+        be automatically processed. You can view these by clicking the thing next to
+        each driver, and you'll have to manually add these to the total.</p>
+    <p>It's just rules - if you can come up with hard and fast rules for these 
+        then I can implement them, and as you use it - if you use it - it'll get 
+        better.</p>
+    <p>For example - the rule to tackle this case might be: "If there's more than one number
+        in the post, use the largest one. Discard the rest. Don't add them all up."</p>
+    <p>The "Unprocessed" button will only appear if there is unprocessed data for that driver. 
+        If the button isn't there, all the posts for that driver were processed. So you'll 
+        need to be looking at the unprocessed stuff; otherwise there's potential for 
+            miles not being paid.</p>
+    <p>You're the one that does it, at the end of the day, so you're going to be the best
+        person to envisage how anything can be changed to help you the most.</p>
+    <p>A other few points of note... :-</p>
+    <ul>
+        <li>I'm sure you're probably au fait with exporting WhatsApp chat data, but
+            if not I can show you how. It's incredibly simple.</li>
+        <li>The driver names are pulled directly from the export, and will be 
+            the names of the contacts on the device that created the WhatsApp export.</li>
+        <li>I could put in a driver filter, but didn't really see the point. You need to 
+            process all drivers all the time, I would imagine...</li>
+        <li>If you don't select a date range, then every post in the export data will
+            be processed. I don't think you can tell WhatsApp to only export between 
+            certain dates, so you'll probably need to be using the date filter here.</li>
+        <li>At the right of each driver row, you can also view the individual reported 
+            mileage amounts that were summed to produce the total for that driver, if you 
+            want to check the software's maths or whatever. All it shows is the posted
+            mileage, not the date of each. I can make it show the date if you want it to.</li>
+        <li>You can also view each post from each driver. If you really want to.</li>
+    </ul>
+    <p>Hope it helps, anyway. I stress again though - it's really not a problem if you 
+        don't use it. No feelings will be hurt ;-)</p>
+    <h5 style="margin-left: 20%; color: darkgreen;"> <i class="fi-foot"></i> <em>Ben</em></h5>
+    <p style="font-size: .95em; color: #7f7f7f;"><br/>(Tell me when you've read this and I'll take it off so you don't need
+        to keep hiding it.)</p>
+</div>

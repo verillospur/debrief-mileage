@@ -59,6 +59,7 @@ const run = (
     lg('running dataorg');
     const dataorg = require('./dataorg');
     const drivers = dataorg.run(blocks);
+    r.drivers = drivers;
     
     // create rows
     lg('generating report rows');
@@ -83,20 +84,6 @@ const run = (
         lg(`- blocks: ${driver.datablocks.length}`);
 
         // do details
-        lg('creating posts details');
-        const postsDetails = new reportDetail();
-        postsDetails.name = config.REPORT_DETAIL_NAME_POSTS;
-        postsDetails.data = driver.datablocks;
-        postsDetails.renderer = new renderer('posts');
-        row.details.push(postsDetails);
-
-        lg('creating total details');
-        const totalDetails = new reportDetail();
-        totalDetails.name = config.REPORT_DETAIL_NAME_MILEAGEDATA;
-        totalDetails.data = driver.mileageDatarows;
-        totalDetails.renderer = new renderer('mileagedata');
-        row.details.push(totalDetails);
-
         lg('creating junk details');
         if (driver.junkDatarows.length > 0) {
             const junkDetails = new reportDetail();
@@ -105,6 +92,23 @@ const run = (
             junkDetails.renderer = new renderer('junk');
             row.details.push(junkDetails);
         }
+
+        lg('creating total details');
+        if (driver.mileageDatarows.length > 0) {
+            const totalDetails = new reportDetail();
+            totalDetails.name = config.REPORT_DETAIL_NAME_MILEAGEDATA;
+            totalDetails.data = driver.mileageDatarows;
+            totalDetails.renderer = new renderer('mileagedata');
+            row.details.push(totalDetails);
+        }
+
+        lg('creating posts details');
+        const postsDetails = new reportDetail();
+        postsDetails.name = config.REPORT_DETAIL_NAME_POSTS;
+        postsDetails.data = driver.datablocks;
+        postsDetails.renderer = new renderer('posts');
+        row.details.push(postsDetails);
+        
     });
     lg(`generated ${r.rows.length} row(s)`);
 

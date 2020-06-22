@@ -25,6 +25,15 @@ class datablock {
         return rv;
     }
 
+    getAllData_html() {
+        let rv = '';
+        this._data.forEach(d => {
+            if (rv.length > 0) rv += '<br/>';
+            rv += d.toString();
+        });
+        return rv;
+    }
+
     //#region properties
 
     get filterAllow() {

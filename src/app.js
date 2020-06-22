@@ -20,3 +20,7 @@ const reportid = 1;
 const report = require('./report');
 const r = report.load(reportid);
 
+
+r.drivers[0].datablocks[0].data.forEach(d => {
+    log.add(': ' + d);
+});

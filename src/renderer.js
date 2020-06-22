@@ -40,7 +40,7 @@ class renderer {
     }
 
     render_posts(data) {
-        return `${data.getAllData()}`;
+        return `${data.getAllData_html()}`;
     }
 
     render_mileagedata(data) {

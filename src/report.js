@@ -13,6 +13,7 @@ class report {
         this._rows = [];
         this._totalMiles = 0;
         this._totalBlocks = 0;
+        this._drivers = null;
     }
 
 
@@ -97,6 +98,13 @@ class report {
     }
     set totalBlocks(v) {
         this._totalBlocks = v;
+    }
+
+    get drivers() {
+        return this._drivers;
+    }
+    set drivers(v) {
+        this._drivers = v;
     }
 }
 
