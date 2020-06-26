@@ -9,6 +9,7 @@ const readFile = filepath => {
     let data = null;
     if (fs.existsSync(filepath)) {
         data = fs.readFileSync(filepath, 'utf-8');
+        data = data.toString();
     }
     return data;
 };
