@@ -133,6 +133,8 @@ const server = function() {
             }
         });
         
+        const visitlogsRouter = require('./routes/visitlogs');
+        app.use('/visitlogs', visitlogsRouter.get_router(context));
 
         lg('finished');
     };

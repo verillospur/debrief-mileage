@@ -10,20 +10,25 @@
     <script type="text/javascript" src="jsgrid/jsgrid.min.js"></script>
 
     <script>
-      $('#jsGrid').jsGrid({
-        width: '100%',
-        height: '400px',
-        inserting: false,
-        editing: false,
-        sorting: true,
-        paging: true,
-        data: [],
-        fields: [
-          { name: 'timestamp', type: 'text', width: 200 },
-          { name: 'data' },
-        ],
+      $(function() {
+        $('#jsGrid').jsGrid({
+          width: '100%',
+          height: '400px',
+          inserting: false,
+          editing: false,
+          sorting: true,
+          paging: true,
+          data: [
+            { timestamp: 'yesterday', data: 'ip/url/etc...' }, 
+            { timestamp: 'today', data: 'ip/url/etc...' }, 
+            { timestamp: 'tomorrow', data: 'ip/url/etc...' }, 
+          ],
+          fields: [
+            { name: 'timestamp', type: 'text', width: 200 },
+            { name: 'data' },
+          ],
+        });
       });
-
     </script>
   </head>
   <body>
@@ -50,11 +55,11 @@
 
     <div class="callout small success">
       <div class="row column text-center">
-        Hello!
+        
       </div>
     </div>
 
-    <div>
+    <div class="callout">
 
       <div id="jsGrid"></div>
 

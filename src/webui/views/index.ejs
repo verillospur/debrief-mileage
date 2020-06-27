@@ -5,10 +5,18 @@
     
     <%- include('inc/head'); %>
 
+    <!-- jsgrid -->
+    <link type="text/css" rel="stylesheet" href="jsgrid/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="jsgrid/jsgrid-theme.min.css" />
+    <script type="text/javascript" src="jsgrid/jsgrid.min.js"></script>
+
     <script>
       $( function() {
+
         $( "#startdate" ).datepicker({ dateFormat: 'dd/mm/yy' });
         $( "#enddate" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+        <% if (report) { %>$( "#report-tabs" ).tabs();<% } %>
       } );
     </script>
   </head>
@@ -53,8 +61,8 @@
     <div class="float-right" style="margin-right: 10px;">[ <a xhref="#" onclick="$('#theform').toggle({ duration: 200, easing: 'swing' })"><i class="fi-clipboard-pencil"></i> toggle form</a> ]</div>
     <div class="clearfix"></div>
     <div class="" id="theform" 
-    <% if (hideForm) { %> style="display: none;" <% } %>
-    >
+      <% if (hideForm) { %> style="display: none;" <% } %>
+      >
     <form method="POST" action="" enctype="multipart/form-data"> 
       <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 small-12 cell">
@@ -80,6 +88,7 @@
     </form>
       <hr />
     </div>
+
 
     <% if (report) { %>
     <div class="clearfix"></div>
@@ -137,6 +146,69 @@
         </div>
       </div>
 
+<% if (report) { %>
+<div id="report-tabs">
+  <ul>
+    <li id="tab-header-1"><a href="#jsgrid-report">Report (View 1)</a></li>
+    <li id="tab-header-2"><a href="#fhgrid-report">Report (View 2)</a></li>
+    <li id="tab-header-3"><a href="#admin-admin">[...]</a></li>
+  </ul>
+  <script>
+    $(function() {
+      $('#tab-header-1').css('font-size', '.8em');
+      $('#tab-header-2').css('font-size', '.8em');
+      $('#tab-header-3').css('font-size', '.8em');
+    });
+  </script>
+
+      <!-- js-grid view block -->
+    <% if (report) { %>
+    <div id="jsgrid-report">
+      <div class="clearfix"></div>
+      <div class="callout">
+        <hr />
+        <div id="jsGrid"></div>
+      </div>
+      <script>
+        $(function() {
+
+          // build data
+          var grid_data = [];
+          <% for (const row of report.rows) { %>
+          var grid_row = {
+            '#': '<%- row.rowNumber %>', 
+            'Driver': '<%- row.driver %>', 
+            'Mileage': '<%- row.mileageTotal %> mile(s)',
+          };
+          grid_data.push(grid_row);
+          <% } %>
+
+          // render grid
+          $('#jsGrid').jsGrid(
+            {
+              width: '100%',
+              inserting: false,
+              editing: false,
+              sorting: true,
+              paging: true,
+              data: grid_data,
+              fields: [
+                { name: '#', type: 'text', width: '25' }, 
+                { name: 'Driver', type: 'text', width: 100 },
+                { name: 'Mileage', type: 'text', width: 100 },
+                { name: '-- actions --' },
+              ],
+            }
+          );
+        });
+      </script>
+    </div>
+    <% } %>
+    <!-- end js-grid view block -->
+    
+    
+    <div id="fhgrid-report">
+   
       <!-- begin sep-bar -->
       <div class="grid-x grid-padding-x">
         <div class="cell auto sep-bar">&nbsp;</div>
@@ -211,29 +283,32 @@
 
       </div>
       
-      
       <% is_alt = !is_alt; %>
       <% } %>
 
-      <!-- end rows -->
+    <!-- end rows -->
 
-      <!-- begin base -->
-      <div class="grid-x grid-padding-x">
-        
-        <div class="cell auto text-right">
-          
-          <ul class="menu simple align-right">
-            <li><a href="#">view raw output</a></li>
-            <li>|</li>
-            <li><a href="#">view log</a></li>
-          </ul>
-
-        </div>
-      </div>
+    <!-- begin base -->
+    <div class="grid-x grid-padding-x">
       
+      <div class="cell auto text-right">
+        
+        <ul class="menu simple align-right">
+          <li><a href="#">view raw output</a></li>
+          <li>|</li>
+          <li><a href="#">view log</a></li>
+        </ul>
+
+      </div>
     </div>
 
+    
+
     <% } %>
+
+    
+</div><!-- tabs /div -->
+<% } // tabs close brace %>
 
     <%- include('inc/footer'); %>
     
