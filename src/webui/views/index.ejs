@@ -4,6 +4,13 @@
     <title><%= page_title %></title>
     
     <%- include('inc/head'); %>
+
+    <script>
+      $( function() {
+        $( "#startdate" ).datepicker({ dateFormat: 'dd/mm/yy' });
+        $( "#enddate" ).datepicker({ dateFormat: 'dd/mm/yy' });
+      } );
+    </script>
   </head>
   <body>
 
@@ -58,11 +65,11 @@
       <div class="grid-x grid-padding-x">
         <div class="large-6 medium-6 small-6 cell">
           <label>Start Date</label>
-          <input type="text" placeholder="dd/mm/yyyy" name="startdate" />
+          <input type="text" placeholder="dd/mm/yyyy" name="startdate" id="startdate" />
         </div>
         <div class="large-6 medium-6 small-6 cell">
           <label>End Date</label>
-          <input type="text" placeholder="dd/mm/yyyy" name="enddate" />
+          <input type="text" placeholder="dd/mm/yyyy" name="enddate" id="enddate" />
         </div>
       </div>
       <div class="grid-x grid-padding-x">
@@ -223,20 +230,14 @@
 
         </div>
       </div>
-
-      <!-- begin sep-bar -->
-      <div class="grid-x grid-padding-x">
-        <div class="cell auto sep-bar">&nbsp;</div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell auto sep">&nbsp;</div>
-      </div>
-      <!-- end sep-bar -->
       
     </div>
 
     <% } %>
 
     <%- include('inc/footer'); %>
+    
+
+
   </body>
 </html>
